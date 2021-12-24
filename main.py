@@ -34,32 +34,36 @@ import re
 # re.sub()
 # re.compile()
 if __name__ == '__main__':
-    s = 'aARaARa-3a2 3a     4.5aaaaaaaaaaaa_2 user@mail.ru root@example.com 2021-01-02 2021-01-03 Андрей Семен Василий Олег апельсин'
-
+    s = 'a aA aa user@mail.ru root@example.com 2021-01-02 2021-01-03 Андрей Семен Василий Олег апельсин'
+    print('Строка для исследования:')
+    print(s)
     # re.match() -> re.Match object
     # ищет вхождение в начале строки
-    result = re.match('aAR', s)
-    print(result)
+    result = re.match('a', s)
+    print('\n', result)
     if result is not None:
         print('совпадение: ', result.group())
         print('начало: ', result.start())
         print('конец: ', result.end())
+        print('интервал: ', result.span())
 
     # re.search() -> re.Match object
     # ищет первое совпадение в строке
-    result = re.search('AR', s)
-    print(result)
+    result = re.search('aA', s)
+    print('\n', result)
     if result is not None:
         print('совпадение: ', result.group())
         print('начало: ', result.start())
         print('конец: ', result.end())
+        print('интервал: ', result.span())
 
     # re.findall() -> List[str]
     # ищет все совпадения в строке
-    result = re.findall('AR', s)
+    result = re.findall('a', s)
     print(result)
 
     # примеры регулярных выражений
+    print('\nПримеры регулярных выражений:')
     # вернуть первое слово из строки
     print(re.findall(r'^\w+', s))
     # вернуть первые два символа каждого слова
@@ -70,9 +74,10 @@ if __name__ == '__main__':
     print(re.findall(r'@\w+.(\w+)', s))
     # вернуть имена пользователей из списка email адресов
     print(re.findall(r'(\w+)@\w+.\w+', s))
+    # извлечь email в виде кортежей (имя_пользователя, домен)
+    print(re.findall(r'(\w+)@(\w+.\w+)', s))
     # вернуть год из найденных дат
     print(re.findall(r'(\d{4})-\d{2}-\d{2}', s))
     # извлечь слова, начинающиеся на гласную
     print(re.findall(r'\b[уеыаоэяиюУЕЫАОЭЯИЮ]\w*', s))
-    # извлечь email в виде кортежей (имя_пользователя, домен)
-    print(re.findall(r'(\w+)@(\w+.\w+)', s))
+
