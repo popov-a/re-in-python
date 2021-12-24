@@ -155,11 +155,20 @@ if __name__ == '__main__':
     <a href="http://someurl.com">Link Name</a>
     <H1>This is a Header</H1>
     <H2>This is a Medium Header</H2>
-    <P>This is a new paragraph! </P>
+    <P>This is a new paragraph!</P>
     <P>This is a another paragraph!</P>
     <B>This is a new sentence without a paragraph break, in bold italics.</B>
     <HR>
     </BODY>
     </HTML>
     '''
-    print(re.findall(r'<.+?>(.+)<.+?>', html))
+    print(re.findall(r'<.+?>(.+?)<.+?>', html))
+
+    # извлечь текст между тегами в разных строках
+    html = '''
+    <P>This is a new paragraph!
+    Second line
+    3 line</P>
+    <P>This is. a another paragraph!</P>
+    '''
+    print(re.findall(r'<.+?>([\s\S]*?)<.+?>', html))
